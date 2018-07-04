@@ -13,6 +13,9 @@ public abstract  class Pessoa {
 		setNome(nome);
 		geraId++;
 	}
+	public static int getGeraId() {
+		return geraId;
+	}
 	private String geraId() {
 		return this.getClass().getSimpleName()+" : "+this.geraId;
 	}

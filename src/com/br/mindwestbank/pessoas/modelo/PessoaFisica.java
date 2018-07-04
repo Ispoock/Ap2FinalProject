@@ -30,6 +30,7 @@ public class PessoaFisica extends Pessoa {
 	public String getCpf() {
 		return this.cpf;
 	}
+	
 	public String toString() {
 		return "Pessoa [Id:"+getId()+" Nome:"+getNome()+" Cpf: "+getCpf()+" Endereco:"+getEndereco().toString()+"]";
 		
