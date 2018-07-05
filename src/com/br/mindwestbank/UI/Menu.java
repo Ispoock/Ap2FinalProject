@@ -2,10 +2,15 @@
 
 package com.br.mindwestbank.UI;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 /**Classe para montagem da tela de menu principal.
 
  * @author Joao Vitor
@@ -31,6 +36,7 @@ public class Menu implements ActionListener{
 		btn3 = new JButton("Sair");
 		painel = new JPanel();
 		
+		
 		painel.add(label1);
 		painel.add(btn1);
 		painel.add(btn2);
@@ -43,7 +49,7 @@ public class Menu implements ActionListener{
 		
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setResizable(false);
-		janela.setBounds(0, 0, 350, 110);
+		janela.setBounds(0, 0, 360, 120);
 		janela.setLocationRelativeTo(null);
 		janela.setVisible(true);
 	}

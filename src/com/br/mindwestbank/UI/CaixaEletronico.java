@@ -73,7 +73,7 @@ public class CaixaEletronico implements ActionListener, Runnable{
 		
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela.setResizable(false);//não permite redimensionamento
-		janela.setBounds(0, 0, 450, 130);
+		janela.setBounds(0, 0, 450, 140);
 		janela.setLocationRelativeTo(null);//centro da tela
 		//janela.pack();
 		janela.setVisible(true);

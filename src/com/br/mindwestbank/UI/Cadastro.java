@@ -92,8 +92,8 @@ public class Cadastro implements ActionListener {
 			painel.add(lbl1);
 			painel.add(lbl2);
 			painel.add(txtNome);
-			painel.add(lbl3);
-			painel.add(txt2);
+			//painel.add(lbl3);
+			//painel.add(txt2);
 			painel.add(lbl4);
 			painel.add(txtCPFCNPJ);
 			painel.add(lbl5);
@@ -121,7 +121,7 @@ public class Cadastro implements ActionListener {
 			janela1.add(painel);
 			janela1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			janela1.setResizable(false);//não permite redimensionamento
-			janela1.setBounds(0, 0, 300, 500);
+			janela1.setBounds(0, 0, 280, 620);
 			janela1.setLocationRelativeTo(null);//centro da tela
 			janela1.setVisible(true);
 			
