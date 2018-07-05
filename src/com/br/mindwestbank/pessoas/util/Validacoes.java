@@ -1,9 +1,16 @@
 package com.br.mindwestbank.pessoas.util;
 
+/**Classe para Validaçoes necessarias para crinaçao de objetos do tipo pessoa.
 
+ * @author Matheus Castro
+
+ * @version 1.0
+ */
 public class Validacoes {
 
-	
+	   /** Método para validaçao de cnpj
+		* @param  cnpj - Cnpj de pessoa
+  *   @return boolean - Validade do cnpj*/
 	public static boolean validaCnpj(String cnpj) {
 		if(cnpj.length() > 14 || cnpj.length() < 14) return false;
 		if(cnpj.equals("00000000000000") || cnpj.equals("11111111111111") || cnpj.equals("22222222222222") ||
@@ -39,7 +46,9 @@ public class Validacoes {
 		else return false;
 	}
 	
-	
+	   /** Método para validaçao de cpf
+	* @param  cpf - Cpf de pessoa
+*   @return boolean - Validade do cpf*/
 	public static boolean validaCpf(String cpf){
 		if(cpf.length() > 11 || cpf.length() < 11) return false;
 		if(cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") ||
