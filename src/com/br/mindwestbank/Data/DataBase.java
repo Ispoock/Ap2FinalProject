@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 import com.br.mindwestbank.contas.modelo.Conta;
 import com.br.mindwestbank.pessoas.modelo.Pessoa;
-/**Classe para Validaçoes necessarias para crinaçao de objetos do tipo pessoa.
+/**Classe para percistencia dos dados.
 
  * @author Matheus Castro
 
@@ -16,7 +16,7 @@ public class DataBase {
 	private static Hashtable<String,Pessoa> pessoas;
 	
 	
-	   /** Método para salvar contas
+	   /** MÃ©todo para salvar contas
 		* @param  conta - Objeto conta*/
 	public static void salvaConta(Conta conta) throws DataBaseException {
 		if(!contas.containsKey(conta.getNumero())) {
@@ -25,7 +25,7 @@ public class DataBase {
 			throw new DataBaseException("Conta ja existente");
 		}
 	}
-	   /** Método para salvar pessoas
+	   /** MÃ©todo para salvar pessoas
 		* @param pessoa  - Objeto pessoa*/
 	public static void salvaConta(Pessoa pessoa) throws DataBaseException {
 		if(!pessoas.containsKey(pessoa.getNome())) {
@@ -34,7 +34,7 @@ public class DataBase {
 			throw new DataBaseException("Pessoa ja existente");
 		}
 	}
-	   /** Método para buscar contas
+	   /** MÃ©todo para buscar contas
 		* @param numero  - Numero da conta*/
 	public static  Conta getConta(int numero) throws DataBaseException {
 		if(contas.containsKey(numero)) {
@@ -43,7 +43,7 @@ public class DataBase {
 			throw new DataBaseException("Conta nao encontrada");
 		}
 	}
-	   /** Método para buscar pessoas
+	   /** MÃ©todo para buscar pessoas
 		* @param Nome  - Nome de pessoa*/
 	public static Pessoa getPessoa(String nome) throws DataBaseException {
 		if(pessoas.containsKey(nome)) {
