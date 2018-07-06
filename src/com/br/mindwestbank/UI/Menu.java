@@ -1,5 +1,3 @@
-
-
 package com.br.mindwestbank.UI;
 
 import java.awt.BorderLayout;
@@ -77,7 +75,7 @@ public class Menu implements ActionListener{
 		}else if(e.getSource() == btn1) {//botão CaixaEletrônico
 			caixa = new CaixaEletronico();
 			if(!((caixa.getDate().getHours()>=7 && caixa.getDate().getHours()<=22) || (caixa.getDate().getHours()==22 && caixa.getDate().getMinutes()==0))) {
-				JOptionPane.showMessageDialog(null, "Não é possível realizar operações neste horário!");
+				JOptionPane.showMessageDialog(null, "Não é possível realizar operaçõeses neste horário!");
 				caixa.getJanela().dispose();
 			}
 		}
