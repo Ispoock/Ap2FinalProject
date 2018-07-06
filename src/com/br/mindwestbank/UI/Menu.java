@@ -27,18 +27,24 @@ public class Menu implements ActionListener{
 	private JPanel painel;
 	private CaixaEletronico caixa;
 	private Cadastro dados;
-    /** Método construtor da tela*/
+    /** MÃ©todo construtor da tela*/
 	
 	public Cadastro getJanelaCadastro() {
 		return this.dados;
 	}
 	public Menu() {
 		janela = new JFrame("Menu");
-		label1 = new JLabel("Escolha uma opção");
-		btn1 = new JButton("CaixaEletrônico");
+		janela.setAutoRequestFocus(false);
+		label1 = new JLabel("Escolha uma das operaÃ§Ãµes abaixo!");
+		label1.setBounds(10, 11, 240, 27);
+		btn1 = new JButton("Caixa EletrÃ´nico");
+		btn1.setBounds(143, 49, 138, 23);
 		btn2 = new JButton("Cadastro");
+		btn2.setBounds(143, 83, 138, 23);
 		btn3 = new JButton("Sair");
+		btn3.setBounds(143, 117, 138, 23);
 		painel = new JPanel();
+		painel.setLayout(null);
 		
 		
 		painel.add(label1);
@@ -53,21 +59,21 @@ public class Menu implements ActionListener{
 		
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setResizable(false);
-		janela.setBounds(0, 0, 360, 120);
+		janela.setBounds(0, 0, 440, 214);
 		janela.setLocationRelativeTo(null);
 		janela.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btn3) {//botão sair
+		if(e.getSource() == btn3) {//botÃ£o sair
 			System.exit(0);
-		}else if(e.getSource() == btn2) {//botão Dados1
+		}else if(e.getSource() == btn2) {//botÃ£o Dados1
 			dados = new Cadastro();
-		}else if(e.getSource() == btn1) {//botão CaixaEletrônico
+		}else if(e.getSource() == btn1) {//botÃ£o CaixaEletrÃ´nico
 			caixa = new CaixaEletronico();
 			if(!((caixa.getDate().getHours()>=7 && caixa.getDate().getHours()<=22) || (caixa.getDate().getHours()==22 && caixa.getDate().getMinutes()==0))) {
-				JOptionPane.showMessageDialog(null, "Não é possível realizar operações neste horário!");
+				JOptionPane.showMessageDialog(null, "NÃ£o Ã© possÃ­vel realizar operaÃ§Ãµes neste horÃ¡rio!");
 				caixa.getJanela().dispose();
 			}
 		}
