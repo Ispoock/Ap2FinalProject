@@ -6,11 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
-/**Classe para montagem da tela do ATM,onde deve ser informado o número da conta e a operação a ser realizada (saldo,
-saque, deposito). A janela responsável pelo caixa eletrônico deverá exibir a hora atual, e somente deverá ser
-possível realizar operações das 7:00hrs às 22:00hrs.
 
- * @author Joao Vitor
+/**Classe para montagem da tela do ATM,onde deve ser informado o nÃºmero da conta e a operaÃ§Ã£o a ser realizada (saldo,
+   saque, deposito). A janela responsÃ¡vel pelo caixa eletrÃ´nico deverÃ¡ exibir a hora atual, e somente deverÃ¡ ser
+   possÃ­vel realizar operaÃ§Ãµes das 7:00hrs Ã s 22:00hrs.
+
+ * @author Joao Vitor / Lucas Vitor.
 
  * @version 1.0
 
@@ -43,22 +44,38 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	private JLabel label1;
 	private JLabel label2;
 	private JLabel horario;
+	private JLabel dataTime;
 	private Date data;
 	private String hms;//hora_minuto_segundo
-    /** Método construtor da tela*/
+	
+    /** 
+     * MÃ©todo construtor da tela
+     */
+	
 	public CaixaEletronico() {
-		janela = new JFrame("Caixa eletrônico");
+		janela = new JFrame("Caixa eletrÃ´nico");
 		nConta = new JTextField(15);
+		nConta.setBounds(144, 105, 126, 20);
 		btn1 = new JButton("OK");
+		btn1.setBounds(188, 145, 47, 23);
 		btn2 = new JButton("Voltar");
+		btn2.setBounds(10, 145, 61, 23);
 		painel = new JPanel();
-		label1 = new JLabel("Número da conta:");
-		label2 = new JLabel("Operação a ser realizada (saldo, saque ou deposito):");
+		label1 = new JLabel("NÃºmero da conta:");
+		label1.setBounds(144, 40, 100, 14);
+		label2 = new JLabel("OperaÃ§Ã£o: (saldo, saque ou deposito):");
+		label2.setBounds(144, 90, 255, 14);
 		operacao = new JTextField(10);
+		operacao.setBounds(144, 56, 126, 20);
 		horario = new JLabel("00:00:00");
+		horario.setBounds(355, 11, 59, 14);
 		Thread contaHora = new Thread(this);
 		contaHora.start();
-		
+		painel.setLayout(null);
+
+		dataTime = new AtualizaData();
+		dataTime.setBounds(10, 11, 64, 14);
+
 		painel.add(label1);
 		painel.add(nConta);
 		painel.add(label2);
@@ -66,14 +83,15 @@ public class CaixaEletronico implements ActionListener, Runnable{
 		painel.add(btn1);
 		painel.add(btn2);
 		painel.add(horario);
-		janela.add(painel);
-		
+		painel.add(dataTime);
+		janela.getContentPane().add(painel);
+
 		btn1.addActionListener(this);
 		btn2.addActionListener(this);
-		
+
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		janela.setResizable(false);//não permite redimensionamento
-		janela.setBounds(0, 0, 450, 140);
+		janela.setResizable(false);//nÃ£o permite redimensionamento
+		janela.setBounds(0, 0, 440, 214);
 		janela.setLocationRelativeTo(null);//centro da tela
 		//janela.pack();
 		janela.setVisible(true);
@@ -83,22 +101,28 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btn1) {
 			if((this.data.getHours()>=7 && this.data.getHours()<=21) || (this.data.getHours()==22 && this.data.getMinutes()==0)) {
-				//realização das operações
+				//realizaÃ§Ã£o das operaÃ§Ãµes
 			}else {
-				JOptionPane.showMessageDialog(null, "Não é possível realizar operações neste horário!");
+				JOptionPane.showMessageDialog(null, "NÃ£o Ã© possÃ­vel realizar operaÃ§Ãµes neste horÃ¡rio!");
 				janela.dispose();
 			}
 		}else if(e.getSource()==btn2) {
 			janela.dispose();
 		}	
 	}
-	
+
 	public Date getDate() {
 		return this.data;
 	}
 	public JFrame getJanela() {
 		return this.janela;
 	}
-	
-	
+	public class AtualizaData extends JLabel{
+
+		public AtualizaData() {
+			Timer t = new Timer(1000, e -> setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+			t.setInitialDelay(0);
+			t.start();
+		}
+	}
 }
