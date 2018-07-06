@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import com.br.mindwestbank.contas.modelo.*;
 import com.br.mindwestbank.pessoas.exceptions.PessoaException;
 import com.br.mindwestbank.pessoas.modelo.*;
 import com.br.mindwestbank.util.Endereco;
@@ -46,11 +47,17 @@ public class Cadastro implements ActionListener {
 		private JTextField txtcep;
 		private JRadioButton radioFisica;
 		private JRadioButton radioJuridica;
-		
+		private JCheckBox checkFuncionario;
+		private CadastroFuncionario janelaFuncionario;
 		private Pessoa pessoa; //polimorfismo
 		private Endereco endereco;
+		private Conta conta;
+		
+		private JRadioButton contaCorrente;
+		private JRadioButton contaPoupanca;
 	    /** Método construtor da tela*/
 		public Cadastro() {
+			
 			janela1 = new JFrame("Cadastro");
 			lbl1 = new JLabel("Insira os dados solicitados:                                ");
 			lbl2 = new JLabel("Nome:");
@@ -88,12 +95,17 @@ public class Cadastro implements ActionListener {
 			radioJuridica.addActionListener(this);
 			botao1.addActionListener(this);
 			
+			checkFuncionario = new JCheckBox("Funcionário");
+			checkFuncionario.setEnabled(false);
+			
+			contaCorrente = new JRadioButton("Conta Corrente");
+			contaPoupanca = new JRadioButton("Conta Poupança");
+			
 			painel = new JPanel();
 			painel.add(lbl1);
 			painel.add(lbl2);
 			painel.add(txtNome);
-			//painel.add(lbl3);
-			//painel.add(txt2);
+
 			painel.add(lbl4);
 			painel.add(txtCPFCNPJ);
 			painel.add(lbl5);
@@ -115,6 +127,12 @@ public class Cadastro implements ActionListener {
 			
 			painel.add(radioFisica);
 			painel.add(radioJuridica);
+			painel.add(checkFuncionario);
+			painel.add(contaCorrente);
+			painel.add(contaPoupanca);
+			
+			contaCorrente.addActionListener(this);
+			contaPoupanca.addActionListener(this);
 			
 			painel.add(botao1);
 			
@@ -132,23 +150,49 @@ public class Cadastro implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == radioFisica) {
 				radioJuridica.setSelected(false);
+				checkFuncionario.setEnabled(true);
 			}else if(e.getSource() == radioJuridica) {
 				radioFisica.setSelected(false);
+				checkFuncionario.setEnabled(false);
+			}
+			if(e.getSource() == contaCorrente) {
+				contaPoupanca.setSelected(false);
+			}else if(e.getSource() == contaPoupanca) {
+				contaCorrente.setSelected(false);
 			}
 			else if(e.getSource() == botao1) {
 				
 				if(radioFisica.isSelected()) {
 					this.cadastraEndereco();
-					try {
-						pessoa = new PessoaFisica(txtNome.getText(),endereco,txtCPFCNPJ.getText());
-					} catch (PessoaException e1) {
-						JOptionPane.showMessageDialog(null, "Por favor, digite um CPF válido", "Atenção", JOptionPane.ERROR_MESSAGE);
+					if(checkFuncionario.isSelected()) {
+						
+						try {
+							janelaFuncionario = new CadastroFuncionario(txtNome.getText(),endereco,txtCPFCNPJ.getText());
+							cadastraConta();
+							janela1.dispose();
+							
+						} catch (PessoaException e1) {
+							JOptionPane.showMessageDialog(null, "Por favor, digite um CPF válido", "Atenção", JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						try {
+							pessoa = new PessoaFisica(txtNome.getText(),endereco,txtCPFCNPJ.getText());
+							cadastraConta();
+							JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso", "", JOptionPane.INFORMATION_MESSAGE);
+							
+							janela1.dispose();
+						} catch (PessoaException e1) {
+							JOptionPane.showMessageDialog(null, "Por favor, digite um CPF válido", "Atenção", JOptionPane.ERROR_MESSAGE);
+						}
 					}
+					
 				}
 				else if(radioJuridica.isSelected()) {
 					this.cadastraEndereco();
 					try {
 						pessoa = new PessoaJuridica(txtNome.getText(),endereco,txtCPFCNPJ.getText());
+						JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso", "", JOptionPane.INFORMATION_MESSAGE);
+						janela1.dispose();
 					} catch (PessoaException e1) {
 						JOptionPane.showMessageDialog(null, "Por favor, digite um CNPJ válido", "Atenção", JOptionPane.ERROR_MESSAGE);
 					}
@@ -160,6 +204,14 @@ public class Cadastro implements ActionListener {
 				
 			}
 			
+		}
+		
+		public void cadastraConta() {
+			if(contaPoupanca.isSelected()) {
+				conta = new Poupanca(pessoa);
+			}else if(contaCorrente.isSelected()) {
+				conta = new ContaCorrente(pessoa);
+			}
 		}
 		
 		public void cadastraEndereco() {

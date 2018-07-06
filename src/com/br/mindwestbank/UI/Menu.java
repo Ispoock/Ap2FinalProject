@@ -28,6 +28,10 @@ public class Menu implements ActionListener{
 	private CaixaEletronico caixa;
 	private Cadastro dados;
     /** Método construtor da tela*/
+	
+	public Cadastro getJanelaCadastro() {
+		return this.dados;
+	}
 	public Menu() {
 		janela = new JFrame("Menu");
 		label1 = new JLabel("Escolha uma opção");
