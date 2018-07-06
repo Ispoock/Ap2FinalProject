@@ -1,40 +1,42 @@
-
-
 package com.br.mindwestbank.UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.Timer;
 
-/**Classe para montagem da tela do ATM,onde deve ser informado o número da conta e a operação a ser realizada (saldo,
+/**Classe para montagem da tela do ATM, onde deve ser informado o número da conta e a operação a ser realizada (saldo,
    saque, deposito). A janela responsável pelo caixa eletrônico deverá exibir a hora atual, e somente deverá ser
-   possível realizar operações das 7:00hrs às 22:00hrs.
+   possível realizar operaçõeses das 7:00hrs às 22:00hrs.
 
  * @author Joao Vitor / Lucas Vitor.
 
  * @version 1.0
 
  */
+
 public class CaixaEletronico implements ActionListener, Runnable{
-	
+
 	public void run() {
 		while(true) {
 			data = new Date();
 			hms = Integer.toString(this.data.getHours()) + ":" + Integer.toString(this.data.getMinutes())
 			+ ":" + Integer.toString(this.data.getSeconds());
-			
+
 			horario.setText(hms);
-			
+
 			try {
 				Thread.sleep(1000);
-				
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	private JFrame janela;
 	private JTextField nConta;
 	private JTextField operacao;
@@ -47,11 +49,11 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	private JLabel dataTime;
 	private Date data;
 	private String hms;//hora_minuto_segundo
-	
-    /** 
-     * Método construtor da tela
-     */
-	
+
+	/** 
+	 * Método construtor da tela
+	 */
+
 	public CaixaEletronico() {
 		janela = new JFrame("Caixa eletrônico");
 		nConta = new JTextField(15);
@@ -61,7 +63,7 @@ public class CaixaEletronico implements ActionListener, Runnable{
 		btn2 = new JButton("Voltar");
 		btn2.setBounds(10, 145, 61, 23);
 		painel = new JPanel();
-		label1 = new JLabel("Número da conta:");
+		label1 = new JLabel("Numero da conta:");
 		label1.setBounds(144, 40, 100, 14);
 		label2 = new JLabel("Operação: (saldo, saque ou deposito):");
 		label2.setBounds(144, 90, 255, 14);
@@ -101,7 +103,7 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btn1) {
 			if((this.data.getHours()>=7 && this.data.getHours()<=21) || (this.data.getHours()==22 && this.data.getMinutes()==0)) {
-				//realização das operações
+				//realizaçãoo das operações
 			}else {
 				JOptionPane.showMessageDialog(null, "Não é possível realizar operações neste horário!");
 				janela.dispose();
