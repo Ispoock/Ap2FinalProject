@@ -11,9 +11,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
 /**Classe para montagem da tela de menu principal.
 
- * @author Joao Vitor
+ * @author Joao Vitor / Lucas Vitor.
 
  * @version 1.0
 
@@ -27,7 +28,10 @@ public class Menu implements ActionListener{
 	private JPanel painel;
 	private CaixaEletronico caixa;
 	private Cadastro dados;
-    /** Método construtor da tela*/
+	
+    /**
+     * Método construtor da tela
+     */
 	
 	public Cadastro getJanelaCadastro() {
 		return this.dados;
