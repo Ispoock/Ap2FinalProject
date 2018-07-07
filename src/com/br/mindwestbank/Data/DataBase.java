@@ -4,7 +4,8 @@ import java.util.Hashtable;
 
 import com.br.mindwestbank.contas.modelo.Conta;
 import com.br.mindwestbank.pessoas.modelo.Pessoa;
-/**Classe para percistencia dos dados.
+
+/**Classe para persistência dos dados.
 
  * @author Matheus Castro
 
