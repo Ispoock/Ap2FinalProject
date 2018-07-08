@@ -1,5 +1,3 @@
-
-
 package com.br.mindwestbank.UI;
 
 import java.awt.BorderLayout;
@@ -11,9 +9,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
 /**Classe para montagem da tela de menu principal.
 
- * @author Joao Vitor
+ * @author Joao Vitor / Lucas Vitor.
 
  * @version 1.0
 
@@ -27,14 +26,27 @@ public class Menu implements ActionListener{
 	private JPanel painel;
 	private CaixaEletronico caixa;
 	private Cadastro dados;
-    /** Método construtor da tela*/
+	
+    /**
+     * Método construtor da tela
+     */
+	
+	public Cadastro getJanelaCadastro() {
+		return this.dados;
+	}
 	public Menu() {
 		janela = new JFrame("Menu");
-		label1 = new JLabel("Escolha uma opção");
-		btn1 = new JButton("CaixaEletrônico");
+		janela.setAutoRequestFocus(false);
+		label1 = new JLabel("Escolha uma das operações abaixo!");
+		label1.setBounds(10, 11, 240, 27);
+		btn1 = new JButton("Caixa Eletrônico");
+		btn1.setBounds(143, 49, 138, 23);
 		btn2 = new JButton("Cadastro");
+		btn2.setBounds(143, 83, 138, 23);
 		btn3 = new JButton("Sair");
+		btn3.setBounds(143, 117, 138, 23);
 		painel = new JPanel();
+		painel.setLayout(null);
 		
 		
 		painel.add(label1);
@@ -49,7 +61,7 @@ public class Menu implements ActionListener{
 		
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setResizable(false);
-		janela.setBounds(0, 0, 360, 120);
+		janela.setBounds(0, 0, 440, 214);
 		janela.setLocationRelativeTo(null);
 		janela.setVisible(true);
 	}
