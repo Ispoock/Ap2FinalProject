@@ -28,7 +28,7 @@ public class Menu implements ActionListener{
 	private Cadastro dados;
 	
     /**
-     * MÃ©todo construtor da tela
+     * Método construtor da tela
      */
 	
 	public Cadastro getJanelaCadastro() {
@@ -37,9 +37,9 @@ public class Menu implements ActionListener{
 	public Menu() {
 		janela = new JFrame("Menu");
 		janela.setAutoRequestFocus(false);
-		label1 = new JLabel("Escolha uma das operaÃ§Ãµes abaixo!");
+		label1 = new JLabel("Escolha uma das operações abaixo!");
 		label1.setBounds(10, 11, 240, 27);
-		btn1 = new JButton("Caixa EletrÃ´nico");
+		btn1 = new JButton("Caixa Eletrônico");
 		btn1.setBounds(143, 49, 138, 23);
 		btn2 = new JButton("Cadastro");
 		btn2.setBounds(143, 83, 138, 23);
@@ -68,14 +68,14 @@ public class Menu implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btn3) {//botÃ£o sair
+		if(e.getSource() == btn3) {//botão sair
 			System.exit(0);
-		}else if(e.getSource() == btn2) {//botÃ£o Dados1
+		}else if(e.getSource() == btn2) {//botão Dados1
 			dados = new Cadastro();
-		}else if(e.getSource() == btn1) {//botÃ£o CaixaEletrÃ´nico
+		}else if(e.getSource() == btn1) {//botão CaixaEletrônico
 			caixa = new CaixaEletronico();
 			if(!((caixa.getDate().getHours()>=7 && caixa.getDate().getHours()<=22) || (caixa.getDate().getHours()==22 && caixa.getDate().getMinutes()==0))) {
-				JOptionPane.showMessageDialog(null, "NÃ£o Ã© possÃ­vel realizar operaÃ§Ãµeses neste horÃ¡rio!");
+				JOptionPane.showMessageDialog(null, "Não é possível realizar operações neste horário!");
 				caixa.getJanela().dispose();
 			}
 		}

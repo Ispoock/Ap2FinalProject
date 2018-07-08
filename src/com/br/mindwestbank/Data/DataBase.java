@@ -1,11 +1,12 @@
 package com.br.mindwestbank.Data;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import com.br.mindwestbank.contas.modelo.Conta;
 import com.br.mindwestbank.pessoas.modelo.Pessoa;
 
-/**Classe para persistÃªncia dos dados.
+/**Classe para persistência dos dados.
 
  * @author Matheus Castro
 
@@ -13,44 +14,26 @@ import com.br.mindwestbank.pessoas.modelo.Pessoa;
  */
 public class DataBase {
 	
-	private static Hashtable<Integer,Conta> contas;
-	private static Hashtable<String,Pessoa> pessoas;
+	private static HashMap<Integer,Conta> contas = new HashMap<>();
 	
 	
-	   /** MÃ©todo para salvar contas
+	   /** Método para salvar contas
 		* @param  conta - Objeto conta*/
 	public static void salvaConta(Conta conta) throws DataBaseException {
-		if(!contas.containsKey(conta.getNumero())) {
-			contas.put(conta.getNumero(),conta);
+		if(contas.containsKey(conta.getNumero())) {
+			throw new DataBaseException("Conta ja registrada");
 		}else {
-			throw new DataBaseException("Conta ja existente");
+			contas.put(conta.getNumero(), conta);
 		}
 	}
-	   /** MÃ©todo para salvar pessoas
-		* @param pessoa  - Objeto pessoa*/
-	public static void salvaConta(Pessoa pessoa) throws DataBaseException {
-		if(!pessoas.containsKey(pessoa.getNome())) {
-			pessoas.put(pessoa.getNome(),pessoa);
-		}else {
-			throw new DataBaseException("Pessoa ja existente");
-		}
-	}
-	   /** MÃ©todo para buscar contas
+	   /** Método para buscar contas
 		* @param numero  - Numero da conta*/
-	public static  Conta getConta(int numero) throws DataBaseException {
+	public static Conta getConta(int numero) throws DataBaseException {
 		if(contas.containsKey(numero)) {
 			return contas.get(numero);
 		}else {
-			throw new DataBaseException("Conta nao encontrada");
+			throw new DataBaseException("Conta não encontrada");
 		}
 	}
-	   /** MÃ©todo para buscar pessoas
-		* @param Nome  - Nome de pessoa*/
-	public static Pessoa getPessoa(String nome) throws DataBaseException {
-		if(pessoas.containsKey(nome)) {
-			return pessoas.get(nome);
-		}else {
-			throw new DataBaseException("Pessoa nao encontrada");
-		}
-	}
+
 }

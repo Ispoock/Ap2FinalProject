@@ -18,6 +18,11 @@ public class PessoaFisica extends Pessoa {
 		validaCpf(cpf);
 		geraId++;
 	}
+	public PessoaFisica(String cpf) throws PessoaException{
+		super("matheus",null);
+		validaCpf(cpf);
+		geraId++;
+	}
 	private void setCpf(String cpf) {
 		this.cpf = cpf;
 	}

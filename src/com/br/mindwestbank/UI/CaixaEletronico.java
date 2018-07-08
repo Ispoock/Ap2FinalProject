@@ -8,9 +8,13 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.Timer;
 
-/**Classe para montagem da tela do ATM, onde deve ser informado o nÃºmero da conta e a operaÃ§Ã£o a ser realizada (saldo,
-   saque, deposito). A janela responsÃ¡vel pelo caixa eletrÃ´nico deverÃ¡ exibir a hora atual, e somente deverÃ¡ ser
-   possÃ­vel realizar operaÃ§Ãµeses das 7:00hrs Ã s 22:00hrs.
+import com.br.mindwestbank.Data.DataBase;
+import com.br.mindwestbank.Data.DataBaseException;
+import com.br.mindwestbank.contas.modelo.Conta;
+
+/**Classe para montagem da tela do ATM, onde deve ser informado o número da conta e a operação a ser realizada (saldo,
+   saque, deposito). A janela responsável pelo caixa eletrônico deverá exibir a hora atual, e somente deverá ser
+   possível realizar operações das 7:00hrs às 22:00hrs.
 
  * @author Joao Vitor / Lucas Vitor.
 
@@ -38,8 +42,8 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	}
 
 	private JFrame janela;
-	private JTextField nConta;
 	private JTextField operacao;
+	private JTextField nConta;
 	private JButton btn1;
 	private JButton btn2;
 	private JPanel painel;
@@ -49,15 +53,17 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	private JLabel dataTime;
 	private Date data;
 	private String hms;//hora_minuto_segundo
+	private Conta conta;
+
 
 	/** 
-	 * MÃ©todo construtor da tela
+	 * Método construtor da tela
 	 */
 
 	public CaixaEletronico() {
-		janela = new JFrame("Caixa eletrÃ´nico");
-		nConta = new JTextField(15);
-		nConta.setBounds(144, 105, 126, 20);
+		janela = new JFrame("Caixa eletronico");
+		operacao = new JTextField(15);
+		operacao.setBounds(144, 105, 126, 25);
 		btn1 = new JButton("OK");
 		btn1.setBounds(188, 145, 47, 23);
 		btn2 = new JButton("Voltar");
@@ -65,10 +71,10 @@ public class CaixaEletronico implements ActionListener, Runnable{
 		painel = new JPanel();
 		label1 = new JLabel("Numero da conta:");
 		label1.setBounds(144, 40, 100, 14);
-		label2 = new JLabel("OperaÃ§Ã£o: (saldo, saque ou deposito):");
+		label2 = new JLabel("Operacao: (saldo, saque ou deposito):");
 		label2.setBounds(144, 90, 255, 14);
-		operacao = new JTextField(10);
-		operacao.setBounds(144, 56, 126, 20);
+		nConta = new JTextField(10);
+		nConta.setBounds(144, 56, 126, 25);
 		horario = new JLabel("00:00:00");
 		horario.setBounds(355, 11, 59, 14);
 		Thread contaHora = new Thread(this);
@@ -79,9 +85,9 @@ public class CaixaEletronico implements ActionListener, Runnable{
 		dataTime.setBounds(10, 11, 64, 14);
 
 		painel.add(label1);
-		painel.add(nConta);
-		painel.add(label2);
 		painel.add(operacao);
+		painel.add(label2);
+		painel.add(nConta);
 		painel.add(btn1);
 		painel.add(btn2);
 		painel.add(horario);
@@ -92,7 +98,7 @@ public class CaixaEletronico implements ActionListener, Runnable{
 		btn2.addActionListener(this);
 
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		janela.setResizable(false);//nÃ£o permite redimensionamento
+		janela.setResizable(false);//não permite redimensionamento
 		janela.setBounds(0, 0, 440, 214);
 		janela.setLocationRelativeTo(null);//centro da tela
 		//janela.pack();
@@ -103,9 +109,17 @@ public class CaixaEletronico implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btn1) {
 			if((this.data.getHours()>=7 && this.data.getHours()<=21) || (this.data.getHours()==22 && this.data.getMinutes()==0)) {
-				//realizaÃ§Ã£oo das operaÃ§Ãµes
+				try {
+					
+					conta = DataBase.getConta(Integer.parseInt(nConta.getText()));
+					
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "Digite um número de conta válido!", "Atenção", JOptionPane.ERROR_MESSAGE);
+				}catch(DataBaseException e1) {
+					JOptionPane.showMessageDialog(null, "Conta não encontrada!", "Atenção", JOptionPane.ERROR_MESSAGE);
+				}
 			}else {
-				JOptionPane.showMessageDialog(null, "NÃ£o Ã© possÃ­vel realizar operaÃ§Ãµes neste horÃ¡rio!");
+				JOptionPane.showMessageDialog(null, "Não é possível realizar operações neste horário!");
 				janela.dispose();
 			}
 		}else if(e.getSource()==btn2) {

@@ -7,8 +7,11 @@ import javax.swing.*;
 
 import com.br.mindwestbank.pessoas.exceptions.PessoaException;
 import com.br.mindwestbank.pessoas.modelo.Funcionario;
+import com.br.mindwestbank.pessoas.modelo.Pessoa;
 import com.br.mindwestbank.util.Endereco;
 import com.br.mindwestbank.pessoas.util.Validacoes;
+import com.br.mindwestbank.Data.DataBase;
+import com.br.mindwestbank.Data.DataBaseException;
 import com.br.mindwestbank.UI.*;
 import com.br.mindwestbank.contas.modelo.Conta;
 import com.br.mindwestbank.contas.modelo.ContaCorrente;
@@ -30,8 +33,11 @@ public class CadastroFuncionario implements ActionListener{
 	
 	private Boolean contaPoupanca;
 	private Boolean contaCorrente;
+	private DataBase DataBase = new DataBase();
 	
 	private Conta conta;
+	
+	private Pessoa pessoa;
 	
 	public CadastroFuncionario(String nome, Endereco endereco, String cpf, Boolean contaPoupanca, Boolean contaCorrente) throws PessoaException{
 		validaCpf(cpf);
@@ -91,9 +97,19 @@ public class CadastroFuncionario implements ActionListener{
 	}
 	public void cadastraConta() {
 		if(contaPoupanca) {
-			conta = new Poupanca(pessoa);
+			conta = new Poupanca(funcionario);
+			try {
+				DataBase.salvaConta(conta);
+			} catch (DataBaseException e) {
+				JOptionPane.showMessageDialog(null, "Conta já existente!", "Atenção", JOptionPane.ERROR_MESSAGE);
+			}
 		}else if(contaCorrente) {
-			conta = new ContaCorrente(pessoa);
+			conta = new ContaCorrente(funcionario);
+			try {
+				DataBase.salvaConta(conta);
+			} catch (DataBaseException e) {
+				JOptionPane.showMessageDialog(null, "Conta já existente!", "Atenção", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 }

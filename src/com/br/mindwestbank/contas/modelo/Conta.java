@@ -1,11 +1,13 @@
 package com.br.mindwestbank.contas.modelo;
 
 
+import javax.swing.JOptionPane;
+
 import com.br.mindwestbank.contas.exceptions.ContaException;
 import com.br.mindwestbank.pessoas.modelo.Pessoa;
 
 public abstract class Conta {
-	protected static int geraNumero = 0;
+	protected static int geraNumero = 5000; //convenção escolhida pelo grupo
 	private int numero;
 	private double saldo = 0;
 	private Pessoa cliente;
@@ -13,6 +15,7 @@ public abstract class Conta {
 	public Conta() {
 		geraNumero++;
 		setNumero(geraNumero);
+		JOptionPane.showMessageDialog(null, "Número da conta: "+this.getNumero(), "", JOptionPane.INFORMATION_MESSAGE);
 	}
 	protected int geraNumero() {
 		return this.geraNumero;
