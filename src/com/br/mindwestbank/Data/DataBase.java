@@ -18,7 +18,8 @@ public class DataBase {
 	
 	
 	   /** Método para salvar contas
-		* @param  conta - Objeto conta*/
+		* @param  conta - Objeto conta
+		* @throws DataBaseException - Conta ja registrada*/
 	public static void salvaConta(Conta conta) throws DataBaseException {
 		if(contas.containsKey(conta.getNumero())) {
 			throw new DataBaseException("Conta ja registrada");
@@ -27,7 +28,8 @@ public class DataBase {
 		}
 	}
 	   /** Método para buscar contas
-		* @param numero  - Numero da conta*/
+		* @param numero  - Numero da conta
+		*  @throws DataBaseException - Conta nao encontrada*/
 	public static Conta getConta(int numero) throws DataBaseException {
 		if(contas.containsKey(numero)) {
 			return contas.get(numero);

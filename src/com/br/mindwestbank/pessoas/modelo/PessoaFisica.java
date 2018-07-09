@@ -13,6 +13,8 @@ import com.br.mindwestbank.util.Endereco;
 public class PessoaFisica extends Pessoa {
 	protected static int geraId = 0;
 	private String cpf;
+	
+	
 	public PessoaFisica(String nome,Endereco endereco,String cpf) throws PessoaException{
 		super(nome,endereco);
 		validaCpf(cpf);

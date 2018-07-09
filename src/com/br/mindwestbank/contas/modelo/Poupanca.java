@@ -11,11 +11,11 @@ public class Poupanca extends Conta {
 	}
 
 	@Override
-	public void saque(double n) throws ContaException{
-		if(getSaldo() < n) {
+	public void saque(double dinheiro) throws ContaException{
+		if(getSaldo() < dinheiro) {
 			throw new ContaException("Saldo Insuficiente!!");
 		}else {
-			setSaldo(getSaldo() - n);
+			setSaldo(getSaldo() - dinheiro);
 		}
 	}
 

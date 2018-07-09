@@ -39,8 +39,9 @@ public abstract class Conta {
 		this.cliente = c;
 	}
 	public abstract void saque(double n) throws ContaException;
+	
 	protected void setSaldo(double n) {  
-		this.saldo += n;
+		this.saldo = n;
 	}
 	public String getTipo() {
 		return this.getClass().getSimpleName();
