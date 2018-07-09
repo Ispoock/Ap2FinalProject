@@ -31,7 +31,7 @@ public class ContaCorrente extends Conta {
 	@Override
 	  /** Método para saque de dinheiro da classe conta.
 	   * Saque so e permitido se valor e ser sacado seja
-	   * ou igual a soma do saldo e do limite da conta.
+	   * igual a soma do saldo e do limite da conta.
 
      *   */
 	public void saque(double dinheiro) throws ContaException{
