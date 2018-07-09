@@ -10,6 +10,11 @@ public class Poupanca extends Conta {
 		setCliente(cliente);
 	}
 
+	  /** Método para saque de dinheiro da classe contaPoupança.
+	   * Saque so e permitido se valor e ser sacado seja
+	   * menor que o saldo da conta.
+
+   *   */
 	@Override
 	public void saque(double dinheiro) throws ContaException{
 		if(getSaldo() < dinheiro) {
