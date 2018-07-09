@@ -19,12 +19,21 @@ public class ContaCorrente extends Conta {
 		return this.limite;
 	}
 	@Override
+	  /** Método para retorno do nome de pessoa.
+	   * A cada deposito e incrementado ao limite da conta corrente
+
+     *   */
 	public void deposito(double dinheiro) {
 		setSaldo(getSaldo()+dinheiro);
 		this.setLimite(getLimite() + getSaldo());
 	}
 
 	@Override
+	  /** Método para saque de dinheiro da classe conta.
+	   * Saque so e permitido se valor e ser sacado seja
+	   * ou igual a soma do saldo e do limite da conta.
+
+     *   */
 	public void saque(double dinheiro) throws ContaException{
 		if((getSaldo()+ getLimite()) < dinheiro) {
 			throw new ContaException("Saldo Insuficiente!!");
