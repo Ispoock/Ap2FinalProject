@@ -20,11 +20,6 @@ public class PessoaFisica extends Pessoa {
 		validaCpf(cpf);
 		geraId++;
 	}
-	public PessoaFisica(String cpf) throws PessoaException{
-		super("matheus",null);
-		validaCpf(cpf);
-		geraId++;
-	}
 	private void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
@@ -36,15 +31,15 @@ public class PessoaFisica extends Pessoa {
 				return true;
 			}
 	}
-	/** Método para retorno do cpf de PessoaFisica
+	/** MÃ©todo para retorno do cpf de PessoaFisica
 
      *   @return String - Cpf de pessoaFisica*/
 	public String getCpf() {
 		return this.cpf;
 	}
-	/** Método para retorno de todas a informaçoes sobre o objeto PessoaFisica
+	/** MÃ©todo para retorno de todas a informaÃ§oes sobre o objeto PessoaFisica
 
-     *   @return String - Todas informaçoes*/
+     *   @return String - Todas informaÃ§oes*/
 	public String toString() {
 		return "Pessoa [Id:"+getId()+" Nome:"+getNome()+" Cpf: "+getCpf()+" Endereco:"+getEndereco().toString()+"]";	
 	}
